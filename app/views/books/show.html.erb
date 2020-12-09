@@ -1,0 +1,35 @@
+<div class="notice"><%= flash[:complete] %></div>
+
+<diV class="container">
+<div class="row">
+<div class="col-lg-4">
+<%= render 'users/list', user: @user %>
+<%= render 'books/list', book: @book %>
+</div>
+
+
+<div class="col-lg-8">
+<table class="table table-striped">
+    <h3>Book detail</h3>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Opinion</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+        <th>
+          <%= attachment_image_tag @user, :profile_image, :fill, 10, 10, fallback: "no_image.jpg"%>
+          </br>
+          <%= link_to @user.username , user_path(@user.id) %>
+        </th>
+        <th><%= @book.title %></th>
+        <th><%= @book.body %></th>
+        <th><%= link_to "Edit", edit_book_path(@book) %></th>
+        <th><%= link_to "Back", books_path %></th>
+</table>
+</div>
+</div>
+</div>

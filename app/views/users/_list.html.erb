@@ -1,0 +1,39 @@
+ <% if @book.errors.any? %>
+    <div id="error_explanation" class="error">
+      <h2><%= pluralize(@book.errors.count, "error") %>
+      prohibited this book from being saved:</h2>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% if user_signed_in? && user == current_user %>
+  <h3>User info</h3>
+<% end %>
+<table class="table">
+  <tr>
+  <%= attachment_image_tag user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg"%>
+  </tr>
+  <tr>
+  <td>name</td>
+  <td><%= user.username %></td>
+  </tr>
+  <tr>
+  <td>introduction</td>
+  <td><%= user.intro %></td>
+  </tr>
+
+  </tr>
+</table>
+<% if user_signed_in? && user == current_user %>
+
+
+
+<button type="button" class="btn btn-light btn-lg btn-block">
+<%= link_to "" , edit_user_path(current_user) ,class:"fas fa-user-cog"%>
+</button>
+
+<% end %>
