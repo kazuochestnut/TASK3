@@ -1,16 +1,20 @@
 class BooksController < ApplicationController
  before_action :authenticate_user!
+ before_action :ensure_correct_user ,only: [:edit, :update]
+
 
   def index
     @books = Book.all
     @book =Book.new
-    @user =current_user
+    @user = current_user
+    # @user = @book.user.page(params[:page]).reverse_order
     @users =User.all
   end
 
   def show
     @book = Book.find(params[:id])
-    @user =current_user
+    @bookn =Book.new
+    @user = @book.user
     @users =User.all
   end
 
@@ -20,12 +24,7 @@ class BooksController < ApplicationController
     @book.user_id =current_user.id
     if @book.save
      redirect_to book_path(@book.id)
-     flash[:complete]="Book was successfully created."
-    elsif
-     @books =Book.all
-     @user =current_user
-     render :index
-     flash[:complete]=""
+     flash[:complete]="You have created book successfully."
     else
      @books = Book.all
      @user =current_user
@@ -40,24 +39,37 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    
+
     if @book.update(book_params)
        redirect_to book_path(@book)
        flash[:complete]="You have updated book successfully."
-    elsif
-       @books =Book.all
-       render :index
-       flash[:complete]=""
     else
-       @books = Book.all
-       render :index
+       render :edit
        flash[:complete]="Failed to update"
     end
   end
 
-  private
+  def destroy
+    book = Book.find(params[:id])
+    book.destroy
+    flash[:complete]="Book was successfully destroyed."
+    redirect_to books_path
+  end
+
+#   def set_book
+#     @book = current_user.books.find_by(id: params[:id])
+#   end
+  # helper_method :current_user, :logged_in?
+
+ private
   def book_params
     params.require(:book).permit(:title, :body)
   end
 
-end
+  def ensure_correct_user
+    @book = Book.find_by(id:params[:id])
+    if @book.user_id != current_user.id
+      redirect_to("/books")
+    end
+  end
+ end

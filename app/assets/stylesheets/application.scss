@@ -15,6 +15,7 @@
  */
  @import "bootstrap";
 
+
 nav{
     width:100;
 }
@@ -23,9 +24,9 @@ p{
     color:white;
 }
 
-a{
-    color:black;
-}
+// a{
+//     color:black;
+// }
 
 h1{
     
@@ -46,3 +47,8 @@ h1{
 .error{
     color:red;
 }
+
+.open{
+    color:green;
+}
+

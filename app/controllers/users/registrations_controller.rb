@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    flash[:complete]="Welcome! You have signed up successfully."
+    # flash[:complete]="Welcome! You have signed up successfully."
   end
 
   # GET /resource/edit
@@ -41,11 +41,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def configure_sign_up_params
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:username, :email])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
   end
  
   def configure_account_update_params
-        devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email])
+        devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

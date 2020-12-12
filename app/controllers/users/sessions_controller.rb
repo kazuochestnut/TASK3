@@ -11,18 +11,18 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super
-    flash[:complete]="Signed in successfully."
+    # flash[:notice]="Signed in successfully."
   end
 
   # DELETE /resource/sign_out
   def destroy
     super
-    flash[:complete]="Signed out successfully."
+    # flash[:complete]="Signed out successfully."
   end
 
   protected
   def configure_sign_in_params
-        devise_parameter_sanitizer.permit(:sign_in, keys: [:username])
+        devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

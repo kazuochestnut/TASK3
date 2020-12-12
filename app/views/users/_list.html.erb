@@ -11,29 +11,28 @@
   <% end %>
 
 <% if user_signed_in? && user == current_user %>
-  <h3>User info</h3>
+  
 <% end %>
+  <h3>User info</h3>
 <table class="table">
   <tr>
   <%= attachment_image_tag user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg"%>
   </tr>
   <tr>
   <td>name</td>
-  <td><%= user.username %></td>
+  <td><%= user.name %></td>
   </tr>
   <tr>
   <td>introduction</td>
-  <td><%= user.intro %></td>
+  <td><%= user.introduction %></td>
   </tr>
 
   </tr>
 </table>
-<% if user_signed_in? && user == current_user %>
 
-
-
+<!--% if user_signed_in? && user == current_user %>-->
+<%= link_to edit_user_path(user) do %>
 <button type="button" class="btn btn-light btn-lg btn-block">
-<%= link_to "" , edit_user_path(current_user) ,class:"fas fa-user-cog"%>
-</button>
-
+<i class="fas fa-user-cog"></i></button>
 <% end %>
+<!--% end %>-->

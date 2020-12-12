@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 before_action :authenticate_user!
+before_action :ensure_correct_user , only: [:edit ,:update]
 
   def index
     @users =User.all
@@ -9,11 +10,10 @@ before_action :authenticate_user!
 
 
   def show
-    @books = Book.all
     @book =Book.new
-    @user = User.find(current_user.id)
-    # @user = User.find(params[:id])
-    @user =current_user
+    # @user = User.find(current_user.id)
+    @user = User.find(params[:id])
+    # @user =current_user
     @books = @user.books
   end
 
@@ -29,23 +29,32 @@ before_action :authenticate_user!
     if @user.update(user_params)
       redirect_to user_path(@user)
       flash[:complete]="You have updated user successfully."
-    elsif
-      render :index
-      flash[:complete]=""
     else
-      render :index
+      render :edit
       flash[:complete]="Failed to save"
     end
-    
+
   end
 
   private
-
-  def set_user
-    @user = User.find([:id])
+  
+    def set_user
+      @user = User.find([:id])
+    end
+  
+    def user_params
+      params.require(:user).permit(:name, :introduction,  :profile_image)
+    end
+    # def correct_user
+    #   redirect_to(user_url) unless params[:id] == current_user.id
+    #   # redirect_to(user_url) unless @user == current_user
+    # end
+  
+    def ensure_correct_user
+      @user = User.find_by(id:params[:id])
+      if @user.id != current_user.id
+        redirect_to("/users/#{current_user.id}")
+      end
+    end
+    
   end
-
-  def user_params
-    params.require(:user).permit(:username, :intro,  :profile_image)
-  end
-end

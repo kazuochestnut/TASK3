@@ -1,30 +1,47 @@
 <div class="container">
-<div class="row">
-<div class="col-lg-2"></div>
-  <div class="col-lg-8">
-  <h3>User info</h3>
-  <!--<table class="table">-->
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
 
-  <%= @user.username %>
+                <% if @user.errors.any? %>
+                <div id="error_explanation" class="error">
+                  <h2><%= pluralize(@user.errors.count, "error") %>
+                  prohibited this book from being saved:</h2>
 
-  <%= form_with model:@user, local:true do |f| %>
-  <h4>Name</h4>
-  <%= f.text_field :username %>
+                  <ul>
+                    <% @user.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+                <% end %>
 
-  <h4>Image</h4>
-  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-  </br>
-  <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+      <h3>User info</h3>
+      <!--<table class="table">-->
+      <!--%= @user.name %>-->
 
-  <h4>Introduction</h4>
-  <%= f.text_area :intro %>
-  </br>
-  <%= f.submit 'Update User' %>
+      <%= form_with model:@user, local:true do |f| %>
+      <!--<h4>Name</h4>-->
 
-  <% end %>
-   <!--</table>-->
+      <label for="user_name">Name</label>
+      </br>
+      <%= f.text_field :name %>
+      <!--<input class="form-control name" type="text" name="user[name]" id="user_name">-->
+      </br>
+      <label for="user_image">Image</label>
+      <!--%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>-->
+      </br>
+      <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+      </br>
+      <label for="user_introduction">Introduction</label>
+      </br>
+      <%= f.text_area :introduction %>
+      </br>
+      <%= f.submit 'Update User', class:'btn btn-secondary' %>
+
+      <% end %>
+       <!--</table>-->
+    </div>
+    <div class="col-lg-2"></div>
   </div>
-<div class="col-lg-2"></div>
-</div>
-</div>
 </div>

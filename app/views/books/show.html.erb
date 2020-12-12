@@ -1,14 +1,14 @@
 <div class="notice"><%= flash[:complete] %></div>
 
-<diV class="container">
+<div class="container">
 <div class="row">
-<div class="col-lg-4">
+<div class="col-md-3">
 <%= render 'users/list', user: @user %>
-<%= render 'books/list', book: @book %>
+<%= render 'books/list', book: @bookn %>
 </div>
 
 
-<div class="col-lg-8">
+<div class="col-md-8 offset-md-1">
 <table class="table table-striped">
     <h3>Book detail</h3>
     <thead>
@@ -21,14 +21,18 @@
       </tr>
     </thead>
         <th>
-          <%= attachment_image_tag @user, :profile_image, :fill, 10, 10, fallback: "no_image.jpg"%>
+          <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size: '40x40' %>
           </br>
-          <%= link_to @user.username , user_path(@user.id) %>
+          <%= link_to @user.name , user_path(@user.id) , class:'btn btn-link'%>
         </th>
-        <th><%= @book.title %></th>
+        <th><%= link_to @book.title , book_path(@book.id) , class:'btn btn-link'%></th>
         <th><%= @book.body %></th>
-        <th><%= link_to "Edit", edit_book_path(@book) %></th>
-        <th><%= link_to "Back", books_path %></th>
+
+        <%  if current_user.id == @book.user_id %>
+        <th><%= link_to "Edit", edit_book_path(@book) , class:'btn btn-success' %></th>
+        <th><%= link_to "Destroy", book_path, method: :delete ,data:{ confirm:'Are you sure?'} , class:'btn btn-danger'%></th>
+    　　<%  end %>
+
 </table>
 </div>
 </div>
