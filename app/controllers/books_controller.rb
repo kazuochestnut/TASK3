@@ -16,6 +16,7 @@ class BooksController < ApplicationController
     @bookn =Book.new
     @user = @book.user
     @users =User.all
+    @post_comment = PostComment.new
   end
 
 

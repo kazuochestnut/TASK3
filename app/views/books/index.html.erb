@@ -20,6 +20,8 @@
   <th></th>
   <th>Title</th>
   <th>Opinion</th>
+  <th></th>
+  <th></th>
   </tr>
 
   <% @books.each do |book|%>
@@ -32,8 +34,28 @@
 
   <td><%= link_to book.title , book_path(book.id) , class:'btn btn-link' %></td>
   <td><%= book.body %></td>
+      <th>
+         <% if book.favorited_by?(current_user) %>
+           <p>
+           <%= link_to book_favorites_path(book), method: :delete do %>
+            ♥<%= book.favorites.count %> いいね
+           <% end %>
+           </p>
+         <% else %>
+           <p>
+           <%= link_to book_favorites_path(book), method: :post do %>
+            ♡<%= book.favorites.count %> いいね
+           <% end %>
+           </p>
+         <% end %>
+      </th>
+
+      <th>
+       <p><%= link_to "#{book.post_comments.count} コメント", book_path(book.id) %></p>
+      </th>
   </tr>
   <% end %>
+
   </table>
 </div>
 </div>
