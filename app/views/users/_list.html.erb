@@ -11,7 +11,7 @@
   <% end %>
 
 <% if user_signed_in? && user == current_user %>
-  
+
 <% end %>
   <h3>User info</h3>
 <table class="table">
@@ -26,8 +26,25 @@
   <td>introduction</td>
   <td><%= user.introduction %></td>
   </tr>
-
+  <tr>
+  <td>follows</td>
+  <td> 
+    <%= link_to following_user_path(user) do %>
+      <%= user.followings.count %>
+    <% end %>
+  </td>
   </tr>
+  <tr>
+  <td>followers</td>
+  <td>
+    <%= link_to followers_user_path(user) do %>
+      <%= user.followers.count %>
+    <% end %>
+  </td>
+  </tr>
+
+  <td><%= render 'relationships/follow_button',user: user %></td>
+
 </table>
 
 <!--% if user_signed_in? && user == current_user %>-->
@@ -35,4 +52,7 @@
 <button type="button" class="btn btn-light btn-lg btn-block">
 <i class="fas fa-user-cog"></i></button>
 <% end %>
+
+
+
 <!--% end %>-->

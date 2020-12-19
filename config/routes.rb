@@ -1,24 +1,29 @@
 Rails.application.routes.draw do
-
-root to: "home#top"
+  root to: "home#top"
 
   get 'home/about'
 
- # devise_for :users
-    devise_for :users
-    # controllers: {
-    #     sessions:      'users/sessions',
-    #     passwords:     'users/passwords',
-    #     registrations: 'users/registrations'
-    # }
+   # devise_for :users
+        # controllers: {
+      #     sessions:      'users/sessions',
+      #     passwords:     'users/passwords',
+      #     registrations: 'users/registrations'
+      # }
+  devise_for :users
 
- resources :books do
+
+  resources :books do
    resource :favorites, only: [:create, :destroy]
    resources :post_comments, only: [:create, :destroy]
- end
- resources :users
+  end
 
+  resources :users do
+   member do
+     get :following, :followers
+    end
+  end
 
+  resources :relationships, only: [:create, :destroy]
 
 
 end
