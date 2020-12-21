@@ -22,6 +22,8 @@ Rails.application.routes.draw do
      get :following, :followers
     end
   end
+  
+  get '/search', to: 'search#search'
 
   resources :relationships, only: [:create, :destroy]
 

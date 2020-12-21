@@ -1,0 +1,54 @@
+<!--<p>検索</p>-->
+<!--<%#= form_tag(search_path,:method => 'get') do %>-->
+<!--  <%#= text_field_tag :search %>-->
+<!--  <%#= submit_tag 'Search', :name => nil %>-->
+<!--<%# end %>-->
+
+<!--<ul><%# @datas.each do |user| %>-->
+<!--  <li>-->
+<!--    <%#= link_to user.name, user %>-->
+<!--    <%#= user.created_at %>-->
+<!--    <%#= user.status %>-->
+<!--  </li>-->
+<!--  <%# end %>-->
+<!--</ul>-->
+
+<% if @users_or_books == "1"%>
+    <h3>Users search for</h3>
+    <table class="table table-striped">
+        <tr>
+            <th></th>
+            <th>name</th>
+        </tr>
+        <% @users.each do |user| %>
+
+            <tr>
+                <th>
+                <%= attachment_image_tag user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: '50x50' %>
+                </th>
+                <th><%= link_to user.name , user_path(user.id) , class:'btn btn-link'%></th>
+            </tr>
+
+        <% end %>
+    </table>
+
+<% elsif @users_or_books == "2" %>
+    <h3>Books search for</h3>
+    <table class="table table-striped">
+        <tr>
+            <th></th>
+            <th>title</th>
+            <th>opinion</th>
+        </tr>
+    <% @books.each do |book| %>
+            <tr>
+                <th>
+                 　 <%= attachment_image_tag book.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: '50x50' %>
+                </th>
+                <th><%= link_to book.title , book_path(book.id) , class:'btn btn-link' %></th>
+                <th><%= book.body %></th>
+            </tr>
+    <% end %>
+    </table>
+<% else %>
+<% end %>

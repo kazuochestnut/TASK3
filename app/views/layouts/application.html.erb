@@ -26,7 +26,7 @@
             <% if user_signed_in? %>
                 <!--<div class="collapse navbar-collapse" id="navbarNavDropdown"></div>-->
                 <!--<ul class="navbar-nav ml-auto justify-content-end ">-->
-
+              <%= render 'search/form' %>
                 <!--<a class="fas fa-home nav-link text-light" href="/users/:id}">Home</a>-->
               <%= link_to 'Home', user_path(current_user.id) ,class:'fas fa-home text-white' %>
 
@@ -70,8 +70,8 @@
             </div>
           </div>
         </nav>
-
-
+   </header>
+  
         <body>
         <div class="open"><%= notice %></div>
 
