@@ -43,31 +43,17 @@
            </p>
          <% end %>
       </th>
-
+      
       <th>
-        <div class="comments">
-        <div>コメント件数：<%= @book.post_comments.count %></div>
-        <% @book.post_comments.each do |post_comment| %>
-          <div>
-              <%= post_comment.user.name %>
-              <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-              <%= post_comment.comment %>
-              
-              <% if post_comment.user == current_user %>
-               <div class="comment-delete">
-              <%= link_to "削除", book_post_comment_path(post_comment.book, post_comment), method: :delete %>
-               </div>
-              <% end %>
-          </div>
-        <% end %>
-        </div>
-
-        <div class="new-comment">
-        <%= form_with(model:[@book, @post_comment], local: true) do |f| %>
-          <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
-        <% end %>
-        </div>
+        
+       <div id="comments_area">
+        <%= render partial: 'post_comments/index', locals: { book: @book } %>
+       </div>
+      
+       <div class="comment-create">
+        <%= render partial: 'post_comments/post', locals: { book: @book, post_comment: @post_comment } %>
+       </div>
+        
       </th>
 
         <%  if current_user.id == @book.user_id %>

@@ -1,0 +1,4 @@
+$("#comments_area").html("<%= j(render 'index', { book: @book }) %>")
+<!--↓コメント送信後のコメント入力フォームを空にしています-->
+$("textarea").val('')
+
