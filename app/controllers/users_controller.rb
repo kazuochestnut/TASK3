@@ -46,6 +46,7 @@ before_action :ensure_correct_user , only: [:edit ,:update]
     @users = @user.followers
     render 'show_follower'
   end
+  
 
   private
   
@@ -66,6 +67,10 @@ before_action :ensure_correct_user , only: [:edit ,:update]
       if @user.id != current_user.id
         redirect_to("/users/#{current_user.id}")
       end
+    end
+    
+    def zipedit
+      params.require(:user).permit(:postcode, :prefecture_name, :address_city, :address_street, :address_building)
     end
     
   end

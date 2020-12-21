@@ -1,19 +1,14 @@
-<%= form_tag(search_path, :method => 'get') do %>
-  <%= text_field_tag 'contants' %>
-  <%= select_tag 'option', options_for_select({"user"=> "1","book"=>"2"})%>
-  <%= select_tag(:choice, options_for_select([["部分検索", "1" ],["後方一致検索", "2" ],["前方一致検索", "3" ],["完全一致検索", "4" ]])) %>
-  <%= submit_tag '検索' %>
-<% end %>
-
-<%#= form_with(url: search_path, local: true, method: :get) do |form| %>
-<%#= form_with url: search_path, method: :get, local: true do |form| %>
-<%#= form_with model:search ,url:search_path, method: :get, local: true do |f| %>
-<%#= form_with(model:[search, users_or_books, how_search],url:search_path, method: :get, local: true) do |f| %>
-<%#= form_with(model:[search, users_or_books, how_search],local: true) do |f| %>
-  <%#= f.label :weather_key, 'Sarch weather' %>
-  <%#= f.text_field :search %>
-  <%#= f.select :option, options_for_select([["user", "1"],["book","2"]])%>
-  <%#= f.select :choice, options_for_select([["部分検索", "1" ],["後方一致検索", "2" ],["前方一致検索", "3" ],["完全一致検索", "4" ]]) %>
-  <%#= f.submit '検索' %>
-  <%#= link_to 'Clear', forecasts_path %>
+<%#= form_tag(search_path, :method => 'get') do %>
+  <%#= text_field_tag 'contants' %>
+  <%#= select_tag 'option', options_for_select({"user"=> "1","book"=>"2"})%>
+  <%#= select_tag(:choice, options_for_select([["部分検索", "1" ],["後方一致検索", "2" ],["前方一致検索", "3" ],["完全一致検索", "4" ]])) %>
+  <%#= submit_tag '検索' %>
 <%# end %>
+
+
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= text_field_tag 'contants' %>
+    <%= select_tag 'option', options_for_select({"user"=> "1","book"=>"2"})%>
+    <%= select_tag(:choice, options_for_select([["部分検索", "1" ],["後方一致検索", "2" ],["前方一致検索", "3" ],["完全一致検索", "4" ]])) %>
+    <%= submit_tag '検索' %>
+  <% end %>
